@@ -94,8 +94,8 @@ Once started, navigate to the following URL to test the API endpoints using the 
 You can run the entire stack within a Docker container:
 
 > **Note:** The current version does not support running local models (Ollama) when using Docker. This feature will be updated in a future release. Please use the Groq cloud model if running via Docker.
-
-**Step 1: Build the Docker Image**
+> **Note:** Fixed. Docker is working properly with local Ollama. However the inference speed is not as good as cloud mode on less powerful machines.
+> **Step 1: Build the Docker Image**
 
 ```bash
 docker build -t rag-agent-api .

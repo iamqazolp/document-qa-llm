@@ -25,7 +25,7 @@ groq_client = Groq(
 )
 
 
-#Yayy we're not at the Retrieval step (the R in RAG)
+#Yayy we're now at the Retrieval step (the R in RAG)
 def retrieval(user_query):
     #Convert the question into an embedding using the exact same model we used earlier
     #model.encode returns a numpy array, but Chroma expects a list, so we use .tolist()
