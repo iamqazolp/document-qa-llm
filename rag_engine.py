@@ -14,7 +14,9 @@ COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 DATABASE_PATH = os.getenv("DATABASE_PATH")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 LOCAL_MODEL_NAME = os.getenv("LOCAL_MODEL_NAME")
+OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 
+ollama_client = ollama.Client(host=OLLAMA_HOST)
 embedding_model = SentenceTransformer(EMBEDDING_MODEL)
 client = chromadb.PersistentClient(path=DATABASE_PATH)
 collection = client.get_or_create_collection(name=COLLECTION_NAME)
@@ -76,7 +78,7 @@ def generation_local(user_query):
     prompt=get_prompt(context_text)
     
     # Call your local Ollama server instead of Groq
-    response = ollama.chat(
+    response = ollama_client.chat(
         model='llama3.2:3b', # Make sure this matches the model you downloaded
         messages=[
             {
