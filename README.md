@@ -58,6 +58,7 @@ DATABASE_PATH = ""
 DOCUMENTS_FOLDER = ""
 GROQ_API_KEY = ""
 LOCAL_MODEL_NAME = "" #llama3.2:3b is recommended since RAG reduces the need of reasoning
+CLOUD_MODEL_NAME = ""
 ```
 
 ### 5. Build the Vector Database

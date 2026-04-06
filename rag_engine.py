@@ -14,6 +14,7 @@ COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 DATABASE_PATH = os.getenv("DATABASE_PATH")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 LOCAL_MODEL_NAME = os.getenv("LOCAL_MODEL_NAME")
+CLOUD_MODEL_NAME = os.getenv("CLOUD_MODEL_NAME")
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 
 ollama_client = ollama.Client(host=OLLAMA_HOST)
@@ -70,7 +71,7 @@ def generation_cloud(user_query):
                 "content": user_query,
             }
         ],
-        model="llama-3.3-70b-versatile",
+        model=CLOUD_MODEL_NAME,
     )
     return chat_completion.choices[0].message.content
 def generation_local(user_query):
@@ -79,7 +80,7 @@ def generation_local(user_query):
     
     # Call your local Ollama server instead of Groq
     response = ollama_client.chat(
-        model='llama3.2:3b', # Make sure this matches the model you downloaded
+        model=LOCAL_MODEL_NAME, # Make sure this matches the model you downloaded
         messages=[
             {
                 "role": "system",

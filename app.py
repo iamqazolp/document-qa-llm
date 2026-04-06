@@ -22,9 +22,15 @@ class ModeRequest(BaseModel):
 async def health_check():
     return {"status": "healthy", "generation_mode": mode}
 
+max_request_length=100
+
 # FastAPI Endpoint
 @app.post("/ask")
 async def ask_document(req: QueryRequest):
+    if not req.query or len(req.query.strip()) == 0:
+        raise HTTPException(status_code=400, detail="Query cannot be empty")
+    if len(req.query.strip()) > max_request_length:
+        raise HTTPException(status_code=400, detail="Query length limit exceeded")
     try:
         result = generation(req.query)
         
